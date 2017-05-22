@@ -4,7 +4,8 @@ $(document).ready(function(){
   var score = 0;
   var wins = 0;
   var losses = 0;
- var scoreOptions = [1, 2, 10, 12];
+  var guesses = 10;
+ var scoreOptions = [1, 2, 10, 15];
   //functions in app
   for (var i = 0; i < scoreOptions.length; i++) {
 
@@ -32,22 +33,27 @@ $(document).ready(function(){
 
     score += crystalValue;
     console.log(score);
+    guesses --;
+    console.log(guesses);
 
-
-    if (score === targetNumber) {
+    if (score === targetNumber && (guesses === 0))  {
       wins++;
-
+      alert('You are worthy!')
+      location.reload();
     }
 
-    else if (score >= targetNumber) {
+    else if (score >= targetNumber && (guesses === 0))  {
       losses++;
-
+      alert('You have dipleased the Guild Master');
+      location.reload();
     }
+    //Update HTML fo user
 $('#Score').html('<h3>Score:' + score +  '</h3>');
 $('#Wins').html('<h3>Wins:' + wins +  '</h3>');
 $('#Losses').html('<h3>Losses:' + losses +  '</h3>');
+$('#guesses').html('<h3>Guesses:' + guesses + '</h3>')
   });
-
+//Pick Number for user to guess
     $( "#start-button" ).click(function() {
      var targetNumber = ''
      for (var i = 0; i <  1; i++) {
@@ -56,6 +62,8 @@ $('#Losses').html('<h3>Losses:' + losses +  '</h3>');
      };
      console.log(targetNumber);
 
+
+//Update HTML for user
      $('#Target').html('<h3>Target Value:' + targetNumber +  '</h3>');
   });
 
